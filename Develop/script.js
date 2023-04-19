@@ -9,7 +9,7 @@ $(function () {
   let today = dayjs();
   let reformatDate = today.format('dddd, MMMM D[th] YYYY');
   $('#currentDay').text(reformatDate);
-  var current_hour = today.format('HH');
+  let current_hour = today.format('HH');
   
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -18,16 +18,15 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-
-  var newTable = $("<table>");
-  var tableBody = $("<tbody>");
+  let t1;
+  let newTable = $("<table>");
+  let tableBody = $("<tbody>");
   // create three rows with data
   for (let i = 9; i <= 17; i++) {
-    var row1 = $("<tr>");
-    //row1.9AM
-    var cell1 = $("<td>");
+    let row1 = $("<tr>");
+    let cell1 = $("<td>");
     if (i < 13) {
-      var t1 = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(i + "AM");
+      t1 = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(i + "AM");
     }
     else {
       t1 = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(i - 12 + "PM");
@@ -36,10 +35,11 @@ $(function () {
     row1.append(cell1);
 
     //row1.textarea1
-    var cell2 = $("<td>");
+    let cell2 = $("<td>");
     let textarea1 = $("<textarea>")
     textarea1.addClass("col-8 col-md-10 description");
-    
+    //adding the id to textarea
+    textarea1.attr("id", "textarea" + i);
     if (i>current_hour) {
       textarea1.addClass("time-block future");
     }
@@ -49,6 +49,9 @@ $(function () {
     else {
       textarea1.addClass("time-block past");
     }
+    //get local storage values
+    textarea1.text(localStorage.getItem("textarea"+i));
+
 
     $(textarea1).attr("rows", "3")
     cell2.append(textarea1);
@@ -59,8 +62,11 @@ $(function () {
     var button3 = $("<button>");
     button3.addClass("btn saveBtn col-2 col-md-1");
     var icon = $("<i>").addClass("fas fa-save").attr("aria-hidden", "true");
+    //add the onclick function here
     button3.append(icon);
     $(button3).attr('aria-label', 'save');
+     //adding the id to buttons
+     button3.attr("id", "button" + i);
     cell3.append(button3);
     row1.append(cell3);
     tableBody.append(row1);
@@ -69,15 +75,26 @@ $(function () {
   $("#myTableContainer").append(newTable);
 
 
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
+  
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
 
+
+
+  $(tableBody).on('click', '.saveBtn', function(event) {
+    // handle the click event on the save button here
+    var buttonId = $(this).attr('id');
+    console.log('Save button clicked: ' + buttonId);
+  
+    // get the textarea associated with the save button
+    var textareaId = buttonId.replace('button', 'textarea');
+    var textareaValue = $('#' + textareaId).val();
+  
+    // save the textarea value to localStorage
+    localStorage.setItem(textareaId, textareaValue);
+    //$(textareaId).text(localStorage.getItem(textareaValue));
+  });
+  
 });
