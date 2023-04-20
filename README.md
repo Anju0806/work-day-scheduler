@@ -23,8 +23,8 @@ THEN the saved events persist
 
 
 ### Screen Shots
+![screencapture](https://user-images.githubusercontent.com/126565826/233275494-6799f7fb-8d0f-42e1-8f89-60f63ffdced7.png)
 
-## Credits
 
 ## Links
 
