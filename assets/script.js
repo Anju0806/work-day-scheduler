@@ -10,47 +10,41 @@ $(function () {
   let reformatDate = today.format('dddd, MMMM D[th] YYYY');
   $('#currentDay').text(reformatDate);
   let current_hour = today.format('HH');
-  
-  // TODO: Add a listener for click events on the save button. This code should
-  
+
   let t1;
   let newTable = $("<table>");
- 
   let tableBody = $("<tbody>");
- 
-  // create nine rows 
+
+  // create nine rows for the time blocks
   for (let i = 9; i <= 17; i++) {
     let row1 = $("<tr>");
-    
     let cell1 = $("<td>");
     cell1.addClass("row hour");
     if (i < 13) {
       t1 = $("<div>").addClass("col-2 col-md-1  text-center py-3 ").text(i + "AM");
     }
     else {
-      t1 = $("<div>").addClass("col-2 col-md-1  text-center py-3 " ).text(i - 12 + "PM");
+      t1 = $("<div>").addClass("col-2 col-md-1  text-center py-3 ").text(i - 12 + "PM");
     }
     cell1.append(t1);
     row1.append(cell1);
-
-    //row1.textarea1
     let cell2 = $("<td>");
     let textarea1 = $("<textarea>")
-    textarea1.addClass("col-8 col-md-10 description");
+    cell2.addClass("col-8 col-md-10 description");
     //adding the id to textarea
     textarea1.attr("id", "textarea" + i);
-    if (i>current_hour) {
-      textarea1.addClass("time-block future");
+    //adding the color(past,present,future) to the cells according to time
+    if (i > current_hour) {
+      cell2.addClass("time-block future");
     }
-    else if (i==current_hour) {
-      textarea1.addClass("time-block present");
+    else if (i == current_hour) {
+      cell2.addClass("time-block present");
     }
     else {
-      textarea1.addClass("time-block past");
+      cell2.addClass("time-block past");
     }
-    //get local storage values
-    textarea1.text(localStorage.getItem("textarea"+i));
-
+    //get local storage values to display in the textarea
+    textarea1.text(localStorage.getItem("textarea" + i));
 
     $(textarea1).attr("rows", "3")
     cell2.append(textarea1);
@@ -61,11 +55,10 @@ $(function () {
     var button3 = $("<button>");
     button3.addClass("btn saveBtn col-2 col-md-1");
     var icon = $("<i>").addClass("fas fa-save").attr("aria-hidden", "true");
-    //add the onclick function here
     button3.append(icon);
     $(button3).attr('aria-label', 'save');
-     //adding the id to buttons
-     button3.attr("id", "button" + i);
+    //adding the id to buttons
+    button3.attr("id", "button" + i);
     cell3.append(button3);
     row1.append(cell3);
     tableBody.append(row1);
@@ -73,16 +66,13 @@ $(function () {
   }
   $("#myTableContainer").append(newTable);
 
-
-  $(tableBody).on('click', '.saveBtn', function(event) {
-   
+  //adding the evvet listener to table body and storing the textarea values in the local storage
+  $(tableBody).on('click', '.saveBtn', function (event) {
     var buttonId = $(this).attr('id');
-    console.log('Save button clicked: ' + buttonId);
     // get the textarea 
     var textareaId = buttonId.replace('button', 'textarea');
     var textareaValue = $('#' + textareaId).val();
-
     localStorage.setItem(textareaId, textareaValue);
   });
-  
+
 });
