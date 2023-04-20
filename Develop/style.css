@@ -14,22 +14,27 @@ textarea {
   
 }
 
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+}
 
 
 .tabl{
   padding-left: 6rem;
-  border-collapse: collapse;
+ 
+  
 }
 
 
 .description {
   
-  white-space: pre-wrap;
-  width:58rem;
+  /* white-space: pre-wrap;*/
+  width:58rem; 
 }
 
 .time-block {
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 
