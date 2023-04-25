@@ -16,6 +16,7 @@ The following are the features of the Work-Day-Scheduler application:
 
 ### Screen Shots
 ![screencapture](https://user-images.githubusercontent.com/126565826/233275494-6799f7fb-8d0f-42e1-8f89-60f63ffdced7.png)
+![screencapture1](https://user-images.githubusercontent.com/126565826/234350464-30bc7cca-184a-40e5-82f0-cb9cd58a6cba.png)
 
 ## Links
 * The URL of the GitHub repository that contains the code: 
