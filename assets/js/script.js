@@ -1,16 +1,16 @@
 
 
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 $(function () {
-
+  
   // Code to display the current date in the header of the page.
   let today = dayjs();
-  let reformatDate = today.format('dddd, MMMM D[th] YYYY');
-  $('#currentDay').text(reformatDate);
-  let current_hour = today.format('HH');
+  setInterval(function(){
+    today=dayjs();
+    reformatDate = today.format('dddd, MMMM D[th] YYYY hh:mm:ss');
+    $('#currentDay').text(reformatDate);
+  }, 1000);
 
+  let current_hour = today.format('HH');
   let t1;
   let newTable = $("<table>");
   let tableBody = $("<tbody>");
@@ -65,8 +65,17 @@ $(function () {
     newTable.append(tableBody);
   }
   $("#myTableContainer").append(newTable);
+///editfrom here
+$("#clear-all").on("click", function() {
+  for (let i = 9; i <= 17; i++) {
+    let textarea = $("#textarea" + i);
+    textarea.val(" ");
+  }
+  localStorage.clear();
+});
+//till here
 
-  //adding the evvet listener to table body and storing the textarea values in the local storage
+  //adding the event listener to table body and storing the textarea values in the local storage
   $(tableBody).on('click', '.saveBtn', function (event) {
     var buttonId = $(this).attr('id');
     // get the textarea 

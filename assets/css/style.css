@@ -14,12 +14,10 @@ textarea {
 }
 td {
   border: solid white;
-  
 }
 
 .tabl{
  display:flex;
-  padding-left: 6rem; 
 }
 
 .description { 
@@ -73,3 +71,13 @@ td {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
+.clrbtn{
+  padding-left: 50%;
+  padding-right: 50%;
+}
+.btn-danger{
+  margin: 1rem;
+  padding: .5rem;
+ 
+}
+
